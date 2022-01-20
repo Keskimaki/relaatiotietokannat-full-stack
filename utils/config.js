@@ -2,10 +2,12 @@ import 'dotenv/config'
 
 const PORT = process.env.PORT
 const DATABASE_URL = process.env.DATABASE_URL
+const SECRET = process.env.SECRET
 
 const env = {
   PORT,
-  DATABASE_URL
+  DATABASE_URL,
+  SECRET
 }
 
 export default env
