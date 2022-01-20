@@ -15,12 +15,16 @@ blogRouter.post('/', tokenExtractor, async (req, res) => {
   res.json(blog)
 })
 
-blogRouter.delete('/:id', blogFinder, async (req, res) => {
-  if (req.blog) {
-    await req.blog.destroy()
-    res.status(204).end()
-  } else {
+blogRouter.delete('/:id', tokenExtractor, async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id)
+  const user = await User.findByPk(req.decodedToken.id)
+  if (!blog) {
     res.status(404).end()
+  } else if (blog.userId !== user.id) {
+    res.status(401).end()
+  } else {
+    await blog.destroy()
+    res.status(204).end()
   }
 })
 
