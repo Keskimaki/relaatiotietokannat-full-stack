@@ -1,7 +1,7 @@
 import express from 'express'
 import { Op } from 'sequelize'
 import { Blog, User } from '../models/index.js'
-import { blogFinder, tokenExtractor } from '../utils/middlewares.js'
+import { tokenExtractor } from '../utils/middlewares.js'
 
 const blogRouter = express.Router()
 
@@ -38,7 +38,7 @@ blogRouter.post('/', tokenExtractor, async (req, res) => {
 blogRouter.delete('/:id', tokenExtractor, async (req, res) => {
   const blog = await Blog.findByPk(req.params.id)
   const user = await User.findByPk(req.decodedToken.id)
-  
+
   if (!blog) {
     res.status(404).end()
   } else if (blog.userId !== user.id) {
