@@ -1,5 +1,6 @@
 import express from 'express'
 import Blog from '../models/blog.js'
+import { blogFinder } from '../utils/middlewares.js'
 
 const blogRouter = express.Router()
 
@@ -9,18 +10,9 @@ blogRouter.get('/', async (_req, res) => {
 })
 
 blogRouter.post('/', async (req, res) => {
-  try {
-    const blog = await Blog.create(req.body)
-    res.json(blog)
-  } catch(error) {
-    return res.status(400).json({ error })
-  }
+  const blog = await Blog.create(req.body)
+  res.json(blog)
 })
-
-const blogFinder = async (req, _res, next) => {
-  req.blog = await Blog.findByPk(req.params.id)
-  next()
-}
 
 blogRouter.delete('/:id', blogFinder, async (req, res) => {
   if (req.blog) {
