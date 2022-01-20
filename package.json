@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Keskimaki/relaatiotietokannat-full-stack/issues"
   },
-  "homepage": "https://github.com/Keskimaki/relaatiotietokannat-full-stack#readme"
+  "homepage": "https://github.com/Keskimaki/relaatiotietokannat-full-stack#readme",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "pg": "^8.7.1",
+    "sequelize": "^6.13.0"
+  }
 }
