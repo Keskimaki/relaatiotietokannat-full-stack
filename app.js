@@ -1,6 +1,7 @@
 import express from 'express'
 import 'express-async-errors'
 import blogRouter from './routes/blogs.js'
+import userRouter from './routes/users.js'
 import { errorHandler } from './utils/middlewares.js'
 
 const app = express()
@@ -11,6 +12,7 @@ app.get('/api/health', (_req, res) => {
 })
 
 app.use('/api/blogs', blogRouter)
+app.use('/api/users', userRouter)
 
 app.use(errorHandler)
 
