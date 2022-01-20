@@ -1,0 +1,19 @@
+{
+  "name": "relaatiotietokannat-full-stack-open",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keskimaki/relaatiotietokannat-full-stack.git"
+  },
+  "author": "Miko Keskimäki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keskimaki/relaatiotietokannat-full-stack/issues"
+  },
+  "homepage": "https://github.com/Keskimaki/relaatiotietokannat-full-stack#readme"
+}
