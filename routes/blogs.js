@@ -5,7 +5,12 @@ import { blogFinder, tokenExtractor } from '../utils/middlewares.js'
 const blogRouter = express.Router()
 
 blogRouter.get('/', async (_req, res) => {
-  const blogs = await Blog.findAll()
+  const blogs = await Blog.findAll({
+    attributes: { exclude: 'userId' },
+    include: {
+      model: User
+    }
+  })
   res.json(blogs)
 })
 
