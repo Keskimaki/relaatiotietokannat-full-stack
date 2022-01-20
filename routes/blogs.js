@@ -18,6 +18,7 @@ blogRouter.get('/', async (req, res) => {
   }
 
   const blogs = await Blog.findAll({
+    order: [['likes', 'DESC']],
     attributes: { exclude: 'userId' },
     include: {
       model: User
@@ -37,6 +38,7 @@ blogRouter.post('/', tokenExtractor, async (req, res) => {
 blogRouter.delete('/:id', tokenExtractor, async (req, res) => {
   const blog = await Blog.findByPk(req.params.id)
   const user = await User.findByPk(req.decodedToken.id)
+  
   if (!blog) {
     res.status(404).end()
   } else if (blog.userId !== user.id) {
@@ -47,11 +49,13 @@ blogRouter.delete('/:id', tokenExtractor, async (req, res) => {
   }
 })
 
-blogRouter.put('/:id', blogFinder, async (req, res) => {
-  if (req.blog) {
-    req.blog.likes = req.body.likes
-    await req.blog.save()
-    res.json(req.blog)
+blogRouter.put('/:id', async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id)
+
+  if (blog) {
+    blog.likes = req.body.likes
+    await blog.save()
+    res.json(blog)
   } else {
     res.status(404).end()
   }
