@@ -14,6 +14,7 @@ const sequelize = new Sequelize(env.DATABASE_URL, {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
+    await runMigrations()
     console.log('database connected')
   } catch (error) {
     console.log('connecting to database failed')
@@ -22,3 +23,32 @@ const connectToDatabase = async () => {
 
   return null
 }
+
+const migrationConf = {
+  storage: 'sequelize',
+  storageOptions: {
+    sequelize,
+    tableName: 'migrations',
+  },
+  migrations: {
+    params: [sequelize.getQueryInterface()],
+    path: `${process.cwd()}/migrations`,
+    pattern: /\.js$/,
+  },
+}
+
+const runMigrations = async () => {
+  const migrator = new Umzug(migrationConf)
+  const migrations = await migrator.up()
+  console.log('Migrations up to date', {
+    files: migrations.map((mig) => mig.file),
+  })
+}
+
+const rollbackMigration = async () => {
+  await sequelize.authenticate()
+  const migrator = new Umzug(migrationConf)
+  await migrator.down()
+}
+
+module.exports = { connectToDatabase, sequelize, rollbackMigration }
