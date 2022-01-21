@@ -1,7 +1,7 @@
-import http from 'http'
-import app from './app.js'
-import { connectToDatabase } from './utils/db.js'
-import env from './utils/config.js'
+const http =  require('http')
+const app = require('./app')
+const { connectToDatabase } = require('./utils/db')
+const env = require('./utils/config.js')
 
 const server = http.createServer(app)
 const PORT = env.PORT || 3001

@@ -1,5 +1,5 @@
-import express from 'express'
-import { User, Blog } from '../models/index.js'
+const express = require('express')
+const { User, Blog } = require('../models/index')
 
 const userRouter = express.Router()
 
@@ -29,4 +29,4 @@ userRouter.put('/:username', async (req, res) => {
   }
 })
 
-export default userRouter
+module.exports = userRouter

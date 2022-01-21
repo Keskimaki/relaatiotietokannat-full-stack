@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken'
-import express from 'express'
-import { User } from '../models/index.js'
-import env from '../utils/config.js'
+const jwt = require('jsonwebtoken')
+const express = require('express')
+const { User } = require('../models/index')
+const env = require('../utils/config')
 
 const loginRouter = express.Router()
 
@@ -28,4 +28,4 @@ loginRouter.post('/', async (req, res) => {
   res.status(200).send({ token, username, name: user.name })
 })
 
-export default loginRouter
+module.exports = loginRouter

@@ -1,5 +1,5 @@
-import { QueryTypes } from 'sequelize'
-import { sequelize } from './utils/db.js'
+const { QueryTypes } = require('sequelize')
+const { sequelize } = require('./utils/db.js')
 
 const printBlogs = async () => {
   const query = "SELECT * FROM blogs;"

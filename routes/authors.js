@@ -1,7 +1,7 @@
-import express from 'express'
-import { Op } from 'sequelize'
-import { Blog } from '../models/index.js'
-import { sequelize } from '../utils/db.js'
+const express = require('express')
+const { Op } = require('sequelize')
+const { Blog } = require('../models/index')
+const { sequelize } = require('../utils/db')
 
 const authorRouter = express.Router()
 
@@ -24,4 +24,4 @@ authorRouter.get('/', async (req, res) => {
   res.json(authors)
 })
 
-export default authorRouter
+module.exports = authorRouter

@@ -1,12 +1,12 @@
-import jwt from 'jsonwebtoken'
-import env from './config.js'
+const jwt = require('jsonwebtoken')
+const env = require('./config')
 
-export const blogFinder = async (req, _res, next) => {
+const blogFinder = async (req, _res, next) => {
   req.blog = await Blog.findByPk(req.params.id)
   next()
 }
 
-export const errorHandler = (error, _req, res, next) => {
+const errorHandler = (error, _req, res, next) => {
   console.error(error.message)
 
   if (error.name == "ReferenceError") {
@@ -19,7 +19,7 @@ export const errorHandler = (error, _req, res, next) => {
   next(error)
 }
 
-export const tokenExtractor = (req, res, next) => {
+const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     try {
@@ -34,3 +34,5 @@ export const tokenExtractor = (req, res, next) => {
   }
   next()
 }
+
+module.exports = { blogFinder, errorHandler, tokenExtractor }

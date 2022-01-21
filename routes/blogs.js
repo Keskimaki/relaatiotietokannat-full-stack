@@ -1,7 +1,7 @@
-import express from 'express'
-import { Op } from 'sequelize'
-import { Blog, User } from '../models/index.js'
-import { tokenExtractor } from '../utils/middlewares.js'
+const express = require('express')
+const { Op } = require('sequelize')
+const { Blog, User } = require('../models/index')
+const { tokenExtractor } = require('../utils/middlewares')
 
 const blogRouter = express.Router()
 
@@ -61,4 +61,4 @@ blogRouter.put('/:id', async (req, res) => {
   }
 })
 
-export default blogRouter
+module.exports = blogRouter

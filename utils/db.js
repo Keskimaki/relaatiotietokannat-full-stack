@@ -1,7 +1,8 @@
-import { Sequelize } from 'sequelize'
-import env from './config.js'
+const Sequelize = require('sequelize')
+const Umzug = require('umzug')
+const env = require('./config')
 
-export const sequelize = new Sequelize(env.DATABASE_URL, {
+const sequelize = new Sequelize(env.DATABASE_URL, {
   dialectOptions: {
     ssl: {
       require: true,
@@ -10,7 +11,7 @@ export const sequelize = new Sequelize(env.DATABASE_URL, {
   }
 })
 
-export const connectToDatabase = async () => {
+const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
     console.log('database connected')
