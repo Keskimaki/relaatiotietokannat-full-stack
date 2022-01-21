@@ -1,5 +1,5 @@
 const express = require('express')
-const { ReadingList, User } = require('../models/index')
+const { ReadingList, User, ActiveSession } = require('../models/index')
 const { tokenExtractor } = require('../utils/middlewares')
 
 const readingListRouter = express.Router()
@@ -10,12 +10,13 @@ readingListRouter.post('/', async (req, res) => {
 })
 
 readingListRouter.put('/:id', tokenExtractor, async (req, res) => {
+  const session = ActiveSession.findOne({ where: { userId: req.decodedToken.id }})
   const readingList = await ReadingList.findByPk(req.params.id)
   const user = await User.findByPk(req.decodedToken.id)
 
   if (!readingList) {
     res.send(404).end()
-  } else if (readingList.userId !== user.id) {
+  } else if (readingList.userId !== user.id || !session) {
     res.status(401).end()
   } else {
     readingList.read = req.body.read
