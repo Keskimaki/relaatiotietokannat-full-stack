@@ -12,14 +12,14 @@ const sequelize = new Sequelize(env.DATABASE_URL, {
 })
 
 const connectToDatabase = async () => {
-  try {
+  //try {
     await sequelize.authenticate()
     await runMigrations()
     console.log('database connected')
-  } catch (error) {
-    console.log('connecting to database failed')
-    return process.exit(1)
-  }
+  //} catch (error) {
+  //  console.log('connecting to database failed')
+  //  return process.exit(1)
+  //}
 
   return null
 }

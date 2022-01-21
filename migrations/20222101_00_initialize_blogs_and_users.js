@@ -24,13 +24,7 @@ module.exports = {
         default: 0
       },
       created_at: Sequelize.DATE,
-      updated_at: Sequelize.DATE,
-      //updatedAt: {
-      //  type: DataTypes.DATE
-      //},
-      //createdAt: {
-      //  type: DataTypes.DATE
-      //}
+      updated_at: Sequelize.DATE
     })
     await queryInterface.createTable('users', {
       id: {
@@ -51,13 +45,7 @@ module.exports = {
         }
       },
       created_at: Sequelize.DATE,
-      updated_at: Sequelize.DATE,
-      //updatedAt: {
-      //  type: DataTypes.DATE
-      //},
-      //createdAt: {
-      //  type: DataTypes.DATE
-      //}
+      updated_at: Sequelize.DATE
     })
     await queryInterface.addColumn('blogs', 'user_id', {
       type: DataTypes.INTEGER,
